@@ -4,7 +4,7 @@ import { StatusCodes, getReasonPhrase } from "http-status-codes";
 import { errorResponse, successResponse } from "../utils/responses";
 import { PatientDelete, PatientModel, PatientUpdate } from "../model/patients";
 import { VisitModel, VisitDelete, VisitUpdate , VisitUpdateAddress } from "../model/visit";
-import { UserModel, UserDelete, UserUpdate } from "../model/users";
+import { DoctorModel, DoctorDelete, DoctorUpdate } from "../model/doctors";
 import { RequestInvalidError } from "../error/request-invalid";
 
 
@@ -108,23 +108,26 @@ class VisitController {
   public async createVisit(context : Context) {
       try{
         let payload = context.request.body as VisitModel;
-        let data = await prisma.visit.create({data: ({
-          skucode: payload.skucode,
-          visit_name: payload.visit_name,
-          height:payload.height,
-          width: payload.width,
-          length:payload.length,
-          threed_obj:payload.threed_obj,
-          patientId: payload.patientId,
-        })})
+        let data = await prisma.visit.create({
+          data: ({
+            visitcode: payload.visitcode,
+            visit_name: payload.visit_name,
+            height:payload.height,
+            width: payload.width,
+            length:payload.length,
+            threed_obj:payload.threed_obj,
+            patientId: payload.patientId,
+            date:''
+        })
+      })
   
         console.log(data.id)
         
         let date = new Date()
         await prisma.logger.create({
           data:({
-            id_user: payload.user_id,
-            id_visit: data.id,
+            id_doctor: payload.doctor_id,
+            id_patient: data.id,
             time : date
           })
         })
@@ -160,12 +163,11 @@ class VisitController {
             }
           })
     
-          
           let date = new Date()
           await prisma.logger.create({
             data:({
-              id_user: visitiddelete.user_id,
-              id_visit: data.id,
+              id_doctor: visitiddelete.doctor_id,
+              id_patient: data.id,
               time: date
             })
           })
@@ -198,7 +200,7 @@ class VisitController {
             id: payload.id,
           },
           data: {
-            skucode: payload.skucode,
+            visitcode: payload.visitcode,
             visit_name: payload.visit_name,
             height:payload.height,
             width: payload.width,
@@ -210,8 +212,8 @@ class VisitController {
         let date = new Date()
         await prisma.logger.create({
           data:({
-            id_user: payload.user_id,
-            id_visit: data.id,
+            id_doctor: payload.doctor_id,
+            id_patient: data.id,
             time : date
           })
         })
@@ -249,8 +251,8 @@ class VisitController {
         let date = new Date()
         await prisma.logger.create({
           data:({
-            id_user: payload.user_id,
-            id_visit: data.id,
+            id_doctor: payload.doctor_id,
+            id_patient: data.id,
             time : date
           })
         })
@@ -275,16 +277,16 @@ class VisitController {
     }   
 }
 
-class UserController {
-  public async getUser(context : Context) {
+class DoctorController {
+  public async getDoctor(context : Context) {
       const data = await prisma.doctor.findMany({})
       return successResponse(context, {data: data}, StatusCodes.OK);
     }
-  public async createUser(context : Context) {
+  public async createDoctor(context : Context) {
       try{
         let date = new Date()
         
-        let payload = context.request.body as UserModel;
+        let payload = context.request.body as DoctorModel;
         console.log(Date())
         let data = await prisma.doctor.create({data: payload})
         return successResponse(context, {data: {
@@ -311,12 +313,12 @@ class UserController {
         )
       }
     }  
-  public async deleteUser(context : Context) {
+  public async deleteDoctor(context : Context) {
       try{
-        let useriddelete = context.request.body as UserDelete;
-        console.log(useriddelete)
+        let doctoriddelete = context.request.body as DoctorDelete;
+        console.log(doctoriddelete)
         let data = await prisma.doctor.delete({where:({
-          id:useriddelete.id
+          id:doctoriddelete.id
         })})
   
         return successResponse(context, {data: data}, StatusCodes.OK);
@@ -337,10 +339,10 @@ class UserController {
         )
       }
     }   
-  public async updateUser(context : Context) {
+  public async updateDoctor(context : Context) {
       try{
         let date = new Date()
-        let payload = context.request.body as UserUpdate;
+        let payload = context.request.body as DoctorUpdate;
         console.log(payload)
         let data = await prisma.doctor.update({
           where: {
@@ -373,4 +375,4 @@ class UserController {
 }
 
 
-export { PatientController, VisitController, UserController };
+export { PatientController, VisitController, DoctorController };

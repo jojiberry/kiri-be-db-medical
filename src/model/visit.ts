@@ -1,22 +1,22 @@
 class VisitModel{
-    skucode!: number;
+    visitcode!: number;
     visit_name!: string;
     height!: number;
     width!: number;
     length!: number;
     threed_obj!: string;
     patientId!: number;
-    user_id! : number
+    doctor_id! : number
 }
 
 class VisitDelete{
     id!:number;
-    user_id! : number
+    doctor_id! : number
 }
 
 class VisitUpdate{
     id!: number;
-    skucode!: number;
+    visitcode!: number;
     visit_name!: string;
     height!: number;
     width!: number;
@@ -24,12 +24,12 @@ class VisitUpdate{
     threed_obj!: string;
     updated!: Date;
     patientId!: number;
-    user_id! : number
+    doctor_id! : number
 }
 
 class VisitUpdateAddress{
     id!: number;
-    user_id! : number
+    doctor_id! : number
     threed_obj!: string;
 }
 

@@ -1,5 +1,5 @@
 import Router from "koa-router";
-import { PatientController, VisitController, UserController} from "../controller/test";
+import { PatientController, VisitController, DoctorController} from "../controller/test";
 import { VisitUpdateAddress } from "../model/visit";
 
 const TEST_PATH = "/test";
@@ -92,37 +92,37 @@ function deleteVisit() {
 
 
 // user routing
-function testUser() {
-  let router = new Router({ prefix: "/user" });
-  let controller = new UserController();
+function testDoctor() {
+  let router = new Router({ prefix: "/doctor" });
+  let controller = new DoctorController();
 
-  router.get("/data", controller.getUser.bind(controller));
+  router.get("/data", controller.getDoctor.bind(controller));
   return router;
 }
 
-function createUser() {
-  let router = new Router({ prefix: "/user" });
-  let controller = new UserController();
+function createDoctor() {
+  let router = new Router({ prefix: "/doctor" });
+  let controller = new DoctorController();
 
-  router.post("/create", controller.createUser.bind(controller));
+  router.post("/create", controller.createDoctor.bind(controller));
   return router;
 }
 
-function updateUser () {
-  let router = new Router({ prefix: "/user" });
-  let controller = new UserController();
+function updateDoctor () {
+  let router = new Router({ prefix: "/doctor" });
+  let controller = new DoctorController();
 
-  router.put("/update", controller.updateUser.bind(controller));
+  router.put("/update", controller.updateDoctor.bind(controller));
   return router;
 }
 
-function deleteUser() {
-  let router = new Router({ prefix: "/user" });
-  let controller = new UserController();
+function deleteDoctor() {
+  let router = new Router({ prefix: "/doctor" });
+  let controller = new DoctorController();
 
-  router.delete("/delete", controller.deleteUser.bind(controller));
+  router.delete("/delete", controller.deleteDoctor.bind(controller));
   return router;
 }
 
-export { testVisit, createPatient, testPatient, deletePatient, updatePatient, createVisit, deleteVisit, updateVisit, updateVisitAddress, testUser, createUser, deleteUser, updateUser };
+export { testVisit, createPatient, testPatient, deletePatient, updatePatient, createVisit, deleteVisit, updateVisit, updateVisitAddress, testDoctor, createDoctor, deleteDoctor, updateDoctor };
 

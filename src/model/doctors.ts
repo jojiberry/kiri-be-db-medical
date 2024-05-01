@@ -1,4 +1,4 @@
-class UserModel{
+class DoctorModel{
     id!: number;
     username!: string;
     password!: string;
@@ -6,16 +6,16 @@ class UserModel{
     rndm!: string
 }
 
-class UserDelete{
+class DoctorDelete{
     id!:number;
 }
 
 
-class UserUpdate{
+class DoctorUpdate{
     id!: number;
     username!: string;
     password!: string;
     rndm!: string
 }
 
-export {UserModel, UserDelete, UserUpdate}
+export {DoctorModel, DoctorDelete, DoctorUpdate}
