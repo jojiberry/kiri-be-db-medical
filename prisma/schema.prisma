@@ -1,0 +1,53 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = "postgresql://josie:@localhost:5432/dbmedical"
+}
+
+model Doctor {
+  id         Int       @id @unique @default(autoincrement())
+  username   String    @unique
+  password   String
+  timelogged DateTime?
+  Logger     Logger[]
+}
+
+model Patient {
+  id            Int     @id @unique @default(autoincrement())
+  location      String
+  height        Int
+  width         Int
+  length        Int
+  visitRelation Visit[]
+}
+
+model Visit {
+  id            Int      @id @unique @default(autoincrement())
+  visitcode     Int
+  visit_name    String
+  height        Int
+  width         Int
+  length        Int
+  threed_obj    String
+  date          String
+  // created     DateTime
+  // updated     DateTime
+  visitRelation Patient  @relation(fields: patientId, references: [id])
+  patientId     Int
+  Logger        Logger[]
+}
+
+model Logger {
+  id         Int      @id @unique @default(autoincrement())
+  doctorId   Doctor   @relation(fields: [id_doctor], references: [id])
+  id_doctor  Int
+  id_visit   Visit    @relation(fields: [id_patient], references: [id])
+  id_patient Int
+  time       DateTime
+}
