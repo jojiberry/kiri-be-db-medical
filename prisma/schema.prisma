@@ -16,38 +16,38 @@ model Doctor {
   password   String
   timelogged DateTime?
   Logger     Logger[]
+  Visit      Visit[]
 }
 
 model Patient {
   id            Int     @id @unique @default(autoincrement())
-  location      String
+  firstname     String
+  lastname      String
   height        Int
-  width         Int
-  length        Int
+  weight        Int
+  age           Int
+  sex           String
   visitRelation Visit[]
 }
 
 model Visit {
-  id            Int      @id @unique @default(autoincrement())
-  visitcode     Int
-  visit_name    String
-  height        Int
-  width         Int
-  length        Int
-  threed_obj    String
-  date          String
-  // created     DateTime
-  // updated     DateTime
-  visitRelation Patient  @relation(fields: patientId, references: [id])
-  patientId     Int
-  Logger        Logger[]
+  id             Int      @id @unique @default(autoincrement())
+  visitcode      Int
+  visit_name     String
+  date           DateTime
+  threed_obj     String
+  patientId      Int
+  visitRelation  Patient  @relation(fields: patientId, references: [id])
+  doctorId       Int
+  doctorRelation Doctor   @relation(fields: doctorId, references: [id])
+  Logger         Logger[]
 }
 
 model Logger {
-  id         Int      @id @unique @default(autoincrement())
-  doctorId   Doctor   @relation(fields: [id_doctor], references: [id])
-  id_doctor  Int
-  id_visit   Visit    @relation(fields: [id_patient], references: [id])
-  id_patient Int
-  time       DateTime
+  id              Int      @id @unique @default(autoincrement())
+  doctorId        Int
+  doctorRelation  Doctor   @relation(fields: [doctorId], references: [id])
+  patientId       Int
+  patientRelation Visit    @relation(fields: [patientId], references: [id])
+  time            DateTime
 }

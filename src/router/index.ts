@@ -1,6 +1,6 @@
 import Koa, { HttpError } from "koa";
 import bodyParser from "koa-bodyparser";
-import { createPatient, testVisit, testPatient, deletePatient, updatePatient, createVisit, deleteVisit, updateVisit, updateVisitAddress, testUser, createUser, deleteUser, updateUser } from "./test";
+import { createPatient, testVisit, testPatient, deletePatient, updatePatient, createVisit, deleteVisit, updateVisit, updateVisitAddress, testDoctor, createDoctor, deleteDoctor, updateDoctor } from "./test";
 import cors from "koa-cors";
 
 
@@ -22,22 +22,22 @@ function routesApi() {
     }
   });
 
-  //warehouse stuff
-  let warehouseAPI = testPatient();
-  app.use(warehouseAPI.routes());
-  app.use(warehouseAPI.allowedMethods());
+  //patient stuff
+  let patientAPI = testPatient();
+  app.use(patientAPI.routes());
+  app.use(patientAPI.allowedMethods());
 
-  let createwarehouseAPI = createPatient();
-  app.use(createwarehouseAPI.routes());
-  app.use(createwarehouseAPI.allowedMethods());
+  let createpatientAPI = createPatient();
+  app.use(createpatientAPI.routes());
+  app.use(createpatientAPI.allowedMethods());
 
-  let deletewarehouseAPI = deletePatient();
-  app.use(deletewarehouseAPI.routes());
-  app.use(deletewarehouseAPI.allowedMethods());
+  let deletepatientAPI = deletePatient();
+  app.use(deletepatientAPI.routes());
+  app.use(deletepatientAPI.allowedMethods());
 
-  let updatewarehouseAPI = updatePatient();
-  app.use(updatewarehouseAPI.routes());
-  app.use(updatewarehouseAPI.allowedMethods());
+  let updatepatientAPI = updatePatient();
+  app.use(updatepatientAPI.routes());
+  app.use(updatepatientAPI.allowedMethods());
 
   //visit stuff
   let visitAPI = testVisit();
@@ -60,22 +60,22 @@ function routesApi() {
   app.use(updatevisitaddressAPI.routes());
   app.use(updatevisitaddressAPI.allowedMethods());
 
-  //user stuff
-  let userAPI = testUser();
-  app.use(userAPI.routes());
-  app.use(userAPI.allowedMethods());
+  //doctor stuff
+  let doctorAPI = testDoctor();
+  app.use(doctorAPI.routes());
+  app.use(doctorAPI.allowedMethods());
 
-  let createUserAPI = createUser();
-  app.use(createUserAPI.routes());  
-  app.use(createUserAPI.allowedMethods());
+  let createDoctorAPI = createDoctor();
+  app.use(createDoctorAPI.routes());  
+  app.use(createDoctorAPI.allowedMethods());
 
-  let deleteuserAPI = deleteUser();
-  app.use(deleteuserAPI.routes());
-  app.use(deleteuserAPI.allowedMethods());
+  let deletedoctorAPI = deleteDoctor();
+  app.use(deletedoctorAPI.routes());
+  app.use(deletedoctorAPI.allowedMethods());
 
-  let updateuserAPI = updateUser();
-  app.use(updateuserAPI.routes());
-  app.use(updateuserAPI.allowedMethods());
+  let updatedoctorAPI = updateDoctor();
+  app.use(updatedoctorAPI.routes());
+  app.use(updatedoctorAPI.allowedMethods());
 
   return app;
 

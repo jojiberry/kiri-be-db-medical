@@ -1,9 +1,11 @@
 class PatientModel{
     id!: number;
-    location!: string;
+    firstname!: string;
+    lastname!: string;
     height!: number;
-    width!: number;
-    length!: number;
+    weight!: number;
+    age!: number;
+    sex!: string
 }
 
 class PatientDelete{
@@ -12,10 +14,12 @@ class PatientDelete{
 
 class PatientUpdate{
     id!: number;
-    location!: string;
+    firstname!: string;
+    lastname!: string;
     height!: number;
-    width!: number;
-    length!: number;
+    weight!: number;
+    age!: number;
+    sex!: string
 }
 
 export {PatientModel, PatientDelete, PatientUpdate}

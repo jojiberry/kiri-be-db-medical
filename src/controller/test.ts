@@ -73,10 +73,12 @@ class PatientController {
           id: payload.id,
         },
         data: {
-          location: payload.location,
+          firstname: payload.firstname,
+          lastname: payload.lastname,
           height: payload.height,
-          width: payload.width,
-          length: payload.length,
+          weight: payload.weight,
+          age: payload.age,
+          sex: payload.sex
         },
       })
 
@@ -112,12 +114,10 @@ class VisitController {
           data: ({
             visitcode: payload.visitcode,
             visit_name: payload.visit_name,
-            height:payload.height,
-            width: payload.width,
-            length:payload.length,
             threed_obj:payload.threed_obj,
             patientId: payload.patientId,
-            date:''
+            date:payload.date,
+            doctorId: payload.doctorId
         })
       })
   
@@ -126,8 +126,8 @@ class VisitController {
         let date = new Date()
         await prisma.logger.create({
           data:({
-            id_doctor: payload.doctor_id,
-            id_patient: data.id,
+            doctorId: payload.doctorId,
+            patientId: data.id,
             time : date
           })
         })
@@ -166,8 +166,8 @@ class VisitController {
           let date = new Date()
           await prisma.logger.create({
             data:({
-              id_doctor: visitiddelete.doctor_id,
-              id_patient: data.id,
+              doctorId: visitiddelete.doctorId,
+              patientId: data.id,
               time: date
             })
           })
@@ -202,18 +202,16 @@ class VisitController {
           data: {
             visitcode: payload.visitcode,
             visit_name: payload.visit_name,
-            height:payload.height,
-            width: payload.width,
-            length:payload.length,
             threed_obj:payload.threed_obj,
             patientId: payload.patientId,
+            date: payload.date
           },})
   
         let date = new Date()
         await prisma.logger.create({
           data:({
-            id_doctor: payload.doctor_id,
-            id_patient: data.id,
+            doctorId: payload.doctorId,
+            patientId: data.id, // ????? DATA OR PAYLOAD
             time : date
           })
         })
@@ -251,8 +249,8 @@ class VisitController {
         let date = new Date()
         await prisma.logger.create({
           data:({
-            id_doctor: payload.doctor_id,
-            id_patient: data.id,
+            doctorId: payload.doctorId,
+            patientId: data.id,
             time : date
           })
         })
