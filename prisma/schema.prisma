@@ -51,3 +51,4 @@ model Logger {
   patientRelation Visit    @relation(fields: [patientId], references: [id])
   time            DateTime
 }
+
